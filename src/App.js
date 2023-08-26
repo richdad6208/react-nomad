@@ -1,21 +1,17 @@
-import Button from "./Button.js";
-import { memo, useState } from "react";
-import PropTypes from "prop-types";
+import { useState } from "react";
+import Todo from "./component/Todo";
 
 function App() {
-  const [value, setValue] = useState(50);
-  Button.propTypes = {
-    fontSize: PropTypes.number,
+  const [showTodo, setShowTodo] = useState(false);
+  const showTodoFn = () => {
+    setShowTodo((prev) => !prev);
   };
-  const changeValue = () => {
-    setValue((current) => current + 1);
-  };
-  const MemorizedButton = memo(Button);
   return (
     <div>
-      <h1 onClick={changeValue}>hellow</h1>
-      <MemorizedButton fontSize={value} />
-      <MemorizedButton fontSize={30} />
+      <button onClick={showTodoFn}>
+        {showTodo ? "투두리스트 숨기기" : "투두리스트 보기"}
+      </button>
+      {showTodo ? <Todo /> : null}
     </div>
   );
 }
